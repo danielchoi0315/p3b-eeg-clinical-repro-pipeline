@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.dylib
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+.venv_bulletproof/
+venv/
+
+# Local outputs and caches
+outputs/
+logs/
+*.log
+*.out
+*.err
+
+# Large data and run products
+openneuro/
+features_cache/
+runs/
+TARBALLS/
+OUTZIP/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*~

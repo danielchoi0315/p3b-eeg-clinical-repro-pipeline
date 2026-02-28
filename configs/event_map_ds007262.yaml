@@ -1,0 +1,16 @@
+defaults: {}
+datasets:
+  ds007262:
+    event_filter: difficulty_range.notna()
+    load_column: difficulty_range
+    load_value_map:
+      0.6-1.5: 1
+      1.5-2.4: 2
+      2.4-3.3: 3
+      3.3-4.2: 4
+      4.2-5.1: 5
+      5.1-6.0: 6
+      6.0-6.9: 7
+    rt_strategy: auto
+    task_contains: arithmetic
+    load_sign: 1.0

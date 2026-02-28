@@ -1,0 +1,41 @@
+defaults:
+  rt_columns_priority:
+    - response_time
+    - reaction_time
+    - rt
+    - RT
+    - response.rt
+    - resp_rt
+    - responseTime
+  min_rt_nonmissing_rate: 0.5
+  control_p_threshold: 0.2
+  control_n_shuffles: 128
+  min_trials_per_subject: 20
+
+datasets:
+  ds005095:
+    event_filter: "value in [31,32,61,62,91,92,121,122,151,152]"
+    load_column: "value"
+    load_transform: "sternberg_code_tens"
+    load_sign: -1.0
+    rt_strategy: "next_response_any"
+    response_filter: "value in [10,11]"
+    response_accuracy_map:
+      "10": 0
+      "11": 1
+
+  ds003655:
+    event_filter: "trial_type.str.contains('^probe:', case=False, na=False)"
+    load_column: "trial_type"
+    load_regex: "probe:\\s*(\\d+)"
+    rt_strategy: "next_response_regex_match"
+    response_filter: "trial_type.str.contains('^Response:', case=False, na=False)"
+    probe_match_regex: "probe:\\s*(?P<load>\\d+)(?P<cond>[A-Za-z])"
+    response_match_regex: "Response:\\s*(?P<load>\\d+)(?P<cond>[A-Za-z]):\\s*(?P<acc>correct|error)"
+
+  ds004117:
+    event_filter: "task_role in ['probe_target', 'probe_not_shown']"
+    load_column: "memory_cond"
+    load_sign: -1.0
+    rt_strategy: "same_trial_click"
+    response_filter: "event_type in ['left_click', 'right_click'] and task_role != 'indicate_ready'"

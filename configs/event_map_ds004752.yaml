@@ -1,0 +1,8 @@
+defaults: {}
+datasets:
+  ds004752:
+    event_filter: SetSize.notna()
+    load_column: SetSize
+    rt_column: ResponseTime
+    task_contains: verbalWM
+    load_sign: 1.0

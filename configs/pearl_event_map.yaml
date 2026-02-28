@@ -1,0 +1,15 @@
+defaults:
+  min_trials_per_subject: 20
+  min_rt_nonmissing_rate: 0.3
+  control_p_threshold: 0.2
+  control_rho_threshold: 0.0
+  control_n_shuffles: 128
+datasets:
+  ds004796:
+    event_filter: event_type.str.contains('S\\s*12', case=False, na=False, regex=True)
+    load_column: event_type
+    load_source: sourcedata_sternberg_log
+    load_sign: 1.0
+    rt_strategy: next_response_any
+    response_filter: trial_type.str.contains('response', case=False, na=False)
+    accuracy_source: sourcedata_sternberg_log

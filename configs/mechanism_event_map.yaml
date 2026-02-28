@@ -1,0 +1,10 @@
+datasets:
+  ds003838:
+    # Final recall/probe events for memory condition in ds003838 memory task.
+    event_filter: "trial_type.str.contains('^memory\\s*\\d+\\s*/\\s*\\d+\\s*(correct|error)', case=False, na=False)"
+    load_column: "trial_type"
+    # groups: numerator, denominator
+    load_regex: "memory\\s*(\\d+)\\s*/\\s*(\\d+)\\s*(?:correct|error)"
+    use_denominator_as_load: true
+    require_num_equals_den: true
+    task_contains: "memory"

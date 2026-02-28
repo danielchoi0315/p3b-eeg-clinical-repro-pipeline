@@ -1,0 +1,116 @@
+# Default pipeline configuration
+# -----------------------------
+# This config encodes the "locked" ERP definition used for P3b extraction, plus
+# pragmatic defaults for pupillometry and modeling.
+
+project:
+  name: "p3b_massive_run"
+  p3_component: "P3b"
+
+# -----------------------------
+# EEG preprocessing + epoching
+# -----------------------------
+eeg:
+  l_freq_hz: 0.1
+  h_freq_hz: 30.0
+  notch_hz: [60.0]      # change to [50.0] if needed
+  resample_hz: null     # e.g., 256.0; null keeps native sampling
+  reref: "average"      # "average" | "Cz" | null
+  reject:
+    eeg_uV: 150.0       # peak-to-peak rejection threshold (microvolts); null disables
+  epoch:
+    tmin_s: -0.2
+    tmax_s: 0.8
+    baseline_s: [-0.2, 0.0]
+  p3b:
+    channel_priority: ["Pz", "CPz", "Cz"]
+    amp_window_s: [0.35, 0.60]     # locked from your Law C definition
+    lat_window_s: [0.30, 0.70]     # latency search window
+
+# -----------------------------
+# Pupillometry (LC–NE proxy)
+# -----------------------------
+pupil:
+  # BIDS eyetracking file handling varies across datasets. We implement a robust
+  # "best effort" reader: the script will fail-closed (skip) if it cannot
+  # unambiguously find the required columns.
+  column_candidates:
+    time_s: ["time", "timestamp", "t", "pupil_timestamp", "gaze_timestamp"]
+    pupil: ["pupil", "pupil_size", "pupil_diameter", "pupil_area", "diameter", "diameter_3d"]
+  # Baseline and response windows relative to event onset:
+  baseline_s: [-0.2, 0.0]
+  response_s: [0.5, 2.5]
+  # If your pupil signal is in arbitrary units and contains blinks, consider
+  # adding blink interpolation in `src/p3b_pipeline/pupil.py`.
+
+# -----------------------------
+# BIDS events mapping
+# -----------------------------
+events:
+  # How to select the stimulus/probe events that define each trial.
+  # You should customize this per dataset if trial_type names differ.
+  selector:
+    column: "trial_type"
+    include: ["probe", "stimulus", "memory_probe"]
+    fallback_columns: ["task_role", "event_type", "value", "condition", "label"]
+
+  # Load label extraction:
+  # 1) If a numeric `memory_load` column exists, it will be used.
+  # 2) Else, if `set_size` exists, it will be used.
+  # 3) Else, the code will attempt to parse digits from `trial_type` (e.g., "load_13").
+  load_columns_priority: ["memory_load", "set_size", "load"]
+  load_mapping_columns: ["trial_type", "memory_cond", "value", "condition", "task_role", "event_type", "label"]
+
+  # Optional behavioral columns:
+  rt_columns_priority: ["rt", "response_time", "reaction_time"]
+  acc_columns_priority: ["correct", "accuracy", "is_correct"]
+
+# -----------------------------
+# Bayesian mediation (GPU)
+# -----------------------------
+bayes_mediation:
+  # Variational training hyperparameters
+  seed: 0
+  batch_size: 8192
+  num_workers: 20
+  max_steps: 20000
+  lr: 2.0e-3
+  grad_clip: 5.0
+  amp: "bf16"           # default on GH200; FP8 requires explicit opt-in + probe
+  enable_fp8: false
+  compile: true         # torch.compile with eager fallback + reason logging
+  prefetch_to_gpu: true
+  batch_tuning:
+    enabled: true
+    min_batch_size: 512
+    target_low: 0.85
+    target_high: 0.92
+    growth: 1.35
+    backoff: 0.90
+    max_trials: 8
+
+# -----------------------------
+# Normative model (GPU)
+# -----------------------------
+normative:
+  seed: 0
+  ensemble_size: 5
+  hidden_sizes: [128, 128, 64]
+  dropout: 0.05
+  lr: 2.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 16384
+  num_workers: 20
+  max_epochs: 80
+  amp: "bf16"
+  enable_fp8: false
+  compile: true
+  prefetch_to_gpu: true
+  batch_tuning:
+    enabled: true
+    min_batch_size: 1024
+    target_low: 0.85
+    target_high: 0.92
+    growth: 1.35
+    backoff: 0.90
+    max_trials: 8

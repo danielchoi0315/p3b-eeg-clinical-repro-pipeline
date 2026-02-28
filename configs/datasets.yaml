@@ -1,0 +1,14 @@
+openneuro_root: /filesystemHcog/openneuro
+datasets:
+  - id: ds003838
+    git_url: https://github.com/OpenNeuroDatasets/ds003838.git
+    pinned_hash: 2b29295
+  - id: ds005095
+    git_url: https://github.com/OpenNeuroDatasets/ds005095.git
+    pinned_hash: 51de64a
+  - id: ds003655
+    git_url: https://github.com/OpenNeuroDatasets/ds003655.git
+    pinned_hash: 4807ef6
+  - id: ds004117
+    git_url: https://github.com/OpenNeuroDatasets/ds004117.git
+    pinned_hash: 065e388

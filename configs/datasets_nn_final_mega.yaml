@@ -1,0 +1,35 @@
+openneuro_root: /filesystemHcog/openneuro
+datasets:
+  - id: ds003655
+    git_url: https://github.com/OpenNeuroDatasets/ds003655.git
+    pinned_hash: 4807ef6e9930eddb6baa531be18118035f3e827c
+  - id: ds004117
+    git_url: https://github.com/OpenNeuroDatasets/ds004117.git
+    pinned_hash: 065e38865296e7707166eb3b1b561044ac62ab4c
+  - id: ds005095
+    git_url: https://github.com/OpenNeuroDatasets/ds005095.git
+    pinned_hash: 51de64a078faa54c5f62f1832e8afadb4137db57
+  - id: ds003838
+    git_url: https://github.com/OpenNeuroDatasets/ds003838.git
+    pinned_hash: 2b2929557878cbd1278c7ef5281f6f875b74152a
+  - id: ds004796
+    git_url: https://github.com/OpenNeuroDatasets/ds004796.git
+    pinned_hash: null
+  - id: ds004504
+    git_url: https://github.com/OpenNeuroDatasets/ds004504.git
+    pinned_hash: 73b1b04c0a8e45e96c6f0682cc077a7919480fc4
+  - id: ds004584
+    git_url: https://github.com/OpenNeuroDatasets/ds004584.git
+    pinned_hash: null
+  - id: ds007020
+    git_url: https://github.com/OpenNeuroDatasets/ds007020.git
+    pinned_hash: null
+  - id: ds004752
+    git_url: https://github.com/OpenNeuroDatasets/ds004752.git
+    pinned_hash: null
+  - id: ds004469
+    git_url: https://github.com/OpenNeuroDatasets/ds004469.git
+    pinned_hash: null
+  - id: ds007262
+    git_url: https://github.com/OpenNeuroDatasets/ds007262.git
+    pinned_hash: null

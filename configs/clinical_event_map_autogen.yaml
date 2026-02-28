@@ -1,0 +1,39 @@
+datasets:
+  ds003523:
+    event_filter: trial_type.str.contains('Question Mark Probe', case=False, na=False)
+    load_column: trial_type
+    load_value_map:
+      'Question Mark Probe: "In"': 1.0
+      'Question Mark Probe: "Out"': 0.0
+    response_accuracy_map:
+      '200': 1.0
+      '201': 0.0
+    response_filter: trial_type.str.contains('Response:', case=False, na=False)
+    rt_strategy: next_response_any
+  ds005114:
+    event_filter: trial_type in ['Probe_aX_onset','Probe_aY_onset','Probe_bY_onset']
+    load_column: trial_type
+    load_value_map:
+      Probe_aX_onset: 1.0
+      Probe_aY_onset: 2.0
+      Probe_bY_onset: 3.0
+    response_accuracy_map:
+      '41': 1.0
+      '42': 0.0
+      '43': 1.0
+      '44': 0.0
+    response_filter: 'trial_type.str.contains(''Response: Probe'', case=False, na=False)'
+    rt_strategy: next_response_any
+defaults:
+  control_n_shuffles: 128
+  control_p_threshold: 0.2
+  min_rt_nonmissing_rate: 0.5
+  min_trials_per_subject: 20
+  rt_columns_priority:
+  - response_time
+  - reaction_time
+  - rt
+  - RT
+  - response.rt
+  - resp_rt
+  - responseTime
