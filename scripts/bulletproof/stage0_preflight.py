@@ -95,7 +95,7 @@ def main() -> int:
         stop_reason(
             audit / "STOP_REASON_expected_kit_missing.md",
             "stage0_preflight",
-            "Expected kit zip not found. Stage0 requires --expected_kit PATH or discoverable MANUSCRIPT kit zip under /lambda/nfs/HCog/filesystemHcog/runs.",
+            "Expected kit zip not found. Stage0 requires --expected_kit PATH or discoverable MANUSCRIPT kit zip under /filesystemHcog/runs.",
             diagnostics={
                 "how_to_supply": "bash scripts/bulletproof/run_master.sh --out_root <OUT_ROOT> --expected_kit /path/to/MANUSCRIPT_KIT.zip",
                 "search_hits": [str(p) for p in search_hits[:20]],
@@ -200,7 +200,6 @@ def main() -> int:
         "storage_policy": {
             "SLURM_TMPDIR": os.environ.get("SLURM_TMPDIR", ""),
             "filesystemHcog_exists": Path("/filesystemHcog").exists(),
-            "filesystemHcog_alt": Path("/lambda/nfs/HCog/filesystemHcog").exists(),
         },
     }
     write_json(audit / "preflight_env.json", env)

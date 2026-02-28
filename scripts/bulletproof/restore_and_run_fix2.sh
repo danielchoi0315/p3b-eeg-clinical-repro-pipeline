@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-RUNS_ROOT="${RUNS_ROOT:-/lambda/nfs/HCog/filesystemHcog/runs}"
+RUNS_ROOT="${RUNS_ROOT:-/filesystemHcog/runs}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$(cd "${SCRIPT_DIR}/../.." && pwd)}"
 export PYTHONPATH="${REPO_ROOT}/src:${PYTHONPATH:-}"

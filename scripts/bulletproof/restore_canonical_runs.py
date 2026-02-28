@@ -229,7 +229,7 @@ def main() -> int:
         print(json.dumps({"status": "already_present", "paths": payload}, indent=2))
         return 0
 
-    search_roots = [runs_root, Path("/lambda/nfs/HCog")]
+    search_roots = [runs_root, Path("/filesystemHcog")]
     home = Path(os.environ.get("HOME", "")).expanduser()
     if str(home):
         search_roots.append(home)

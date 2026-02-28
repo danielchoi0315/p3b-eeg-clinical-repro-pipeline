@@ -11,7 +11,7 @@ from common import command_env, ensure_out_tree, ensure_stage_status, find_repo,
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_root", type=Path, required=True)
-    ap.add_argument("--data_root", type=Path, default=Path("/lambda/nfs/HCog/filesystemHcog/openneuro"))
+    ap.add_argument("--data_root", type=Path, default=Path("/filesystemHcog/openneuro"))
     return ap.parse_args()
 
 

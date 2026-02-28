@@ -25,8 +25,8 @@ REQUIRED_CONFIRMATORY_DATASETS = CORE_LAWC_DATASETS + MECHANISM_DATASETS + CLINI
 OPTIONAL_DATASETS = ["ds004796", "ds007262", "ds004752"]
 
 EXPECTED_KIT_SEARCH_ROOTS = [
-    Path("/lambda/nfs/HCog/filesystemHcog/runs"),
     Path("/filesystemHcog/runs"),
+    Path(os.environ.get("RUNS_ROOT", "/filesystemHcog/runs")),
 ]
 EXPECTED_KIT_PATTERNS = [
     "**/OUTZIP/MANUSCRIPT_KIT*.zip",
@@ -141,8 +141,8 @@ def find_repo() -> Optional[Path]:
             return p
 
     roots: List[Path] = [Path(os.environ.get("HOME", "/home/ubuntu"))]
-    if Path("/lambda/nfs/HCog").exists():
-        roots.append(Path("/lambda/nfs/HCog"))
+    if Path("/workspace").exists():
+        roots.append(Path("/workspace"))
 
     cwd = Path.cwd().resolve()
     if (cwd / "scripts" / "bulletproof" / "master.py").exists():
@@ -169,8 +169,6 @@ def find_repo() -> Optional[Path]:
 
 def find_kit_paths() -> List[Path]:
     roots: List[Path] = [Path(os.environ.get("HOME", "/home/ubuntu")), Path("/scratch"), Path("/filesystemHcog")]
-    if not Path("/filesystemHcog").exists() and Path("/lambda/nfs/HCog/filesystemHcog").exists():
-        roots.append(Path("/lambda/nfs/HCog/filesystemHcog"))
 
     hits: List[Path] = []
     for root in roots:
@@ -457,8 +455,6 @@ def best_scratch_base() -> Path:
         return Path(slurm_tmp)
     if Path("/filesystemHcog").exists():
         return Path("/filesystemHcog")
-    if Path("/lambda/nfs/HCog/filesystemHcog").exists():
-        return Path("/lambda/nfs/HCog/filesystemHcog")
     return Path(os.environ.get("HOME", "/home/ubuntu"))
 
 

@@ -23,7 +23,7 @@ from common import (
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_root", type=Path, required=True)
-    ap.add_argument("--data_root", type=Path, default=Path("/lambda/nfs/HCog/filesystemHcog/openneuro"))
+    ap.add_argument("--data_root", type=Path, default=Path("/filesystemHcog/openneuro"))
     ap.add_argument("--expected_kit", type=Path, default=None)
     return ap.parse_args()
 
@@ -79,11 +79,11 @@ def main() -> int:
     datalad_cands = [
         Path(os.environ.get("DATALAD_BIN", "")),
         Path("/usr/bin/datalad"),
-        Path("/lambda/nfs/HCog/filesystemHcog/venvs/research_pipeline/bin/datalad"),
+        Path("/filesystemHcog/venvs/research_pipeline/bin/datalad"),
         repo / ".venv" / "bin" / "datalad",
         repo / ".venv_bulletproof" / "bin" / "datalad",
     ]
-    for p in sorted(Path("/lambda/nfs/HCog/filesystemHcog/venvs").glob("*/bin/datalad")):
+    for p in sorted(Path("/filesystemHcog/venvs").glob("*/bin/datalad")):
         datalad_cands.append(p)
     for cand in datalad_cands:
         if not str(cand).strip():

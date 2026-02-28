@@ -25,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_root", type=Path, default=out_root_default())
     ap.add_argument("--repo_root", type=Path, default=Path(os.environ.get("REPO_ROOT", str(default_repo))))
-    ap.add_argument("--data_root", type=Path, default=Path("/lambda/nfs/HCog/filesystemHcog/openneuro"))
+    ap.add_argument("--data_root", type=Path, default=Path("/filesystemHcog/openneuro"))
     ap.add_argument("--wall_hours", type=float, default=12.0)
     ap.add_argument("--expected_kit", type=Path, default=None)
     ap.add_argument("--max_attempts", type=int, default=10)

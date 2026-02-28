@@ -21,7 +21,7 @@ from common import (
     parse_dataset_hashes_payload,
 )
 
-SEARCH_ROOTS = [Path("/lambda/nfs/HCog/filesystemHcog/runs"), Path("/filesystemHcog/runs")]
+SEARCH_ROOTS = [Path("/filesystemHcog/runs"), Path("/filesystemHcog/runs")]
 EXPECTED_COLUMNS = [
     "section",
     "dataset_id",

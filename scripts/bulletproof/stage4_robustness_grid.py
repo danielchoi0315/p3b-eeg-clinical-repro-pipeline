@@ -20,7 +20,7 @@ CORE_DATASETS = ["ds003655", "ds004117", "ds005095"]
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_root", type=Path, required=True)
-    ap.add_argument("--data_root", type=Path, default=Path("/lambda/nfs/HCog/filesystemHcog/openneuro"))
+    ap.add_argument("--data_root", type=Path, default=Path("/filesystemHcog/openneuro"))
     ap.add_argument("--worker_index", type=int, default=-1)
     ap.add_argument("--max_workers", type=int, default=3)
     ap.add_argument("--fast_from_repro", action="store_true")

@@ -36,7 +36,7 @@ from common import (
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_root", type=Path, required=True)
-    ap.add_argument("--data_root", type=Path, default=Path("/lambda/nfs/HCog/filesystemHcog/openneuro"))
+    ap.add_argument("--data_root", type=Path, default=Path("/filesystemHcog/openneuro"))
     ap.add_argument("--wall_hours", type=float, default=12.0)
     ap.add_argument("--dataset_id", type=str, default="")
     ap.add_argument("--dataset_index", type=int, default=-1)
