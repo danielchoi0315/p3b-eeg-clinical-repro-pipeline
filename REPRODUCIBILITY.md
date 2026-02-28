@@ -1,6 +1,6 @@
 # Reproducibility Guide
 
-This document describes the minimum steps required to reproduce audited results from this repository.
+This guide covers the minimum steps to reproduce audited outputs from this repository.
 
 ## 1) Prepare environment
 
@@ -10,7 +10,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Install system tools (`datalad`, `git-annex`) if not available.
+Install system tools (`datalad`, `git-annex`) if not already available.
 
 ## 2) Provide an explicit expected kit
 
@@ -24,25 +24,29 @@ The expected kit zip is mandatory and must include:
 ```bash
 export PYTHONPATH="$(pwd)/src:${PYTHONPATH:-}"
 
-bash scripts/bulletproof/run_master.sh \
-  --out_root /filesystemHcog/runs/$(date +%Y%m%d_%H%M%S)_REPRO_BULLETPROOF_MASTER_RUN \
+bash scripts/repro/run_master.sh \
+  --out_root /filesystemHcog/runs/$(date +%Y%m%d_%H%M%S)_REPRO_MASTER_RUN \
   --expected_kit /absolute/path/to/EXPECTED_KIT.zip \
   --wall_hours 12 \
   --max_attempts 10
 ```
 
-## 4) Verify final artifacts
+## 4) Verify final outputs
 
 Expected paths under `<OUT_ROOT>`:
 
-- `AUDIT/BULLETPROOF_AUDIT_REPORT.md`
+- `AUDIT/AUDIT_REPORT.md`
 - `AUDIT/CONFIRMATORY_MATCH_REPORT.md`
 - `OUTZIP/MANUSCRIPT_KIT_UPDATED.zip`
 - `OUTZIP/OVERLEAF_UPDATED.zip`
 - `OUTZIP/PRISM_ARTIST_PACK.zip`
 - `TARBALLS/results_only.tar.gz`
 
-## 5) Integrity checks
+Compatibility note:
+
+- `AUDIT/BULLETPROOF_AUDIT_REPORT.md` may also be present for legacy workflows.
+
+## 5) Integrity check
 
 ```bash
 sha256sum <OUT_ROOT>/TARBALLS/results_only.tar.gz

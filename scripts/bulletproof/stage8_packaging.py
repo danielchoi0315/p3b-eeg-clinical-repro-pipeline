@@ -136,7 +136,7 @@ def main() -> int:
     stop_files = sorted([p for p in out_root.rglob("STOP_REASON*.md") if p.is_file()])
     status_lines = [f"- {k}: `{v.get('status')}`" for k, v in sorted(summaries.items())]
     report_lines = [
-        "# BULLETPROOF AUDIT REPORT",
+        "# AUDIT REPORT",
         "",
         "## Confirmatory Match",
         f"- status: `{summaries.get('stage3_match_check', {}).get('status', '<missing>')}`",
@@ -177,7 +177,11 @@ def main() -> int:
             f"- PRISM_ARTIST_PACK.zip sha256: `{sha256_file(pr_zip)}`",
         ]
     )
-    write_text(audit / "BULLETPROOF_AUDIT_REPORT.md", "\n".join(report_lines) + "\n")
+    audit_report = audit / "AUDIT_REPORT.md"
+    legacy_audit_report = audit / "BULLETPROOF_AUDIT_REPORT.md"
+    report_txt = "\n".join(report_lines) + "\n"
+    write_text(audit_report, report_txt)
+    write_text(legacy_audit_report, report_txt)
 
     ensure_stage_status(
         audit,
@@ -187,7 +191,8 @@ def main() -> int:
             "manuscript_zip": str(mk_zip),
             "overleaf_zip": str(ov_zip),
             "prism_zip": str(pr_zip),
-            "audit_report": str(audit / "BULLETPROOF_AUDIT_REPORT.md"),
+            "audit_report": str(audit_report),
+            "legacy_audit_report": str(legacy_audit_report),
         },
     )
     return 0

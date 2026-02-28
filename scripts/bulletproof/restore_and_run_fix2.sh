@@ -136,15 +136,15 @@ if errs:
 print(json.dumps({"expected_kit_zip": str(zip_path), "row_count": n_rows}, indent=2))
 PY
 
-NEW_OUT_ROOT="${RUNS_ROOT}/$(date +%Y%m%d_%H%M%S)_REPRO_BULLETPROOF_MASTER_RUN_FIX2"
-bash scripts/bulletproof/run_master.sh \
+NEW_OUT_ROOT="${RUNS_ROOT}/$(date +%Y%m%d_%H%M%S)_REPRO_MASTER_RUN_FIX2"
+bash scripts/repro/run_master.sh \
   --out_root "${NEW_OUT_ROOT}" \
   --expected_kit "${EXPECTED_KIT_ZIP}" \
   --wall_hours 12 \
   --max_attempts 10
 
 echo "NEW_OUT_ROOT=${NEW_OUT_ROOT}"
-echo "AUDIT_REPORT=${NEW_OUT_ROOT}/AUDIT/BULLETPROOF_AUDIT_REPORT.md"
+echo "AUDIT_REPORT=${NEW_OUT_ROOT}/AUDIT/AUDIT_REPORT.md"
 if [[ -f "${NEW_OUT_ROOT}/DIFF_REPORT.md" ]]; then
   echo "DIFF_REPORT=${NEW_OUT_ROOT}/DIFF_REPORT.md"
 fi

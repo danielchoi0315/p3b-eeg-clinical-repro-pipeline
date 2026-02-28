@@ -97,7 +97,7 @@ def main() -> int:
             "stage0_preflight",
             "Expected kit zip not found. Stage0 requires --expected_kit PATH or discoverable MANUSCRIPT kit zip under /filesystemHcog/runs.",
             diagnostics={
-                "how_to_supply": "bash scripts/bulletproof/run_master.sh --out_root <OUT_ROOT> --expected_kit /path/to/MANUSCRIPT_KIT.zip",
+                "how_to_supply": "bash scripts/repro/run_master.sh --out_root <OUT_ROOT> --expected_kit /path/to/MANUSCRIPT_KIT.zip",
                 "search_hits": [str(p) for p in search_hits[:20]],
             },
         )

@@ -242,7 +242,7 @@ def main() -> int:
         return 1
 
     print(f"OUT_ROOT={out_root}")
-    print(f"AUDIT_REPORT={audit / 'BULLETPROOF_AUDIT_REPORT.md'}")
+    print(f"AUDIT_REPORT={audit / 'AUDIT_REPORT.md'}")
     print(f"MANUSCRIPT_ZIP={paths['OUTZIP'] / 'MANUSCRIPT_KIT_UPDATED.zip'}")
     print(f"OVERLEAF_ZIP={paths['OUTZIP'] / 'OVERLEAF_UPDATED.zip'}")
     print(f"PRISM_ZIP={paths['OUTZIP'] / 'PRISM_ARTIST_PACK.zip'}")
